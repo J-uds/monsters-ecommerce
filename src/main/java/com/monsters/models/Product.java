@@ -39,6 +39,6 @@ public class Product {
 
     @OneToMany(targetEntity = Review.class, fetch = FetchType.LAZY, mappedBy = "product")
     //LAZY trae la lista solo cuando yo se la solicite
-    //mappedBy se mapea con el atributo product de la clase review, es decir ese atributo será la clave foranea
+    //mappedBy se mapea con el atributo product de la clase review, es decir ese atributo será la clave foránea
     private List<Review> reviews;
 }
