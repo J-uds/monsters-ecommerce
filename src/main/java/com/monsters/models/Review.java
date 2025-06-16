@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -21,7 +21,57 @@ public class Review {
     private String body;
 
     @ManyToOne(targetEntity = Product.class)
-    //@JoinColumn(name = "id_product")
+    @JoinColumn(name = "product_id")
     //para cambiar el nombre de la columna añadida, por defecto será product_id
     private Product product;
+
+    public Review() {
+    }
+
+    public Review(String userName, double rating, String body, Product product) {
+        this.userName = userName;
+        this.rating = rating;
+        this.body = body;
+        this.product = product;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    /*public void setId(Long id) {
+        this.id = id;
+    }*/
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
