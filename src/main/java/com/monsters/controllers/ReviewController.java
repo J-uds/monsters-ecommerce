@@ -19,7 +19,7 @@ public class ReviewController {
 
     @GetMapping("/review")
     public ResponseEntity<List<Review>> getAllReviewController() {
-        List<Review> reviews = reviewService.getAllReviewService();
+        List<Review> reviews = reviewService.getAllReview();
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 }
