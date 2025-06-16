@@ -1,4 +1,12 @@
 package com.monsters.dtos.review;
 
-public record ReviewRequest() {
+import com.monsters.models.Product;
+
+public record ReviewRequest(
+        String userName,
+        double rating,
+        String body,
+        Long productId
+) {
+
 }

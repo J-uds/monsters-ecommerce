@@ -35,18 +35,22 @@ public class ProductService {
         return ProductMapper.entityToDto(savedProduct);
     }
 
-    /*public void deleteProductById(Long id) {
-        productRepository.deleteById(id);
-    }*/
+    public void deleteProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        productRepository.delete(product);
+    }
 
-    /*public Product updateProductById(Long id, Product updatedProduct) {
-        Product toUpdateProduct = getByIdProduct(id);
-        toUpdateProduct.setName(updatedProduct.getName());
-        toUpdateProduct.setPrice(updatedProduct.getPrice());
-        toUpdateProduct.setImageUrl(updatedProduct.getImageUrl());
-        toUpdateProduct.setRating(updatedProduct.getRating());
-        toUpdateProduct.setReviewCount(updatedProduct.getReviewCount());
+    public ProductResponse updateProductById(Long id, ProductRequest updatedProduct) {
+        Product toUpdateProduct = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
-        return productRepository.save(toUpdateProduct);
-    }*/
+        toUpdateProduct.setName(updatedProduct.name());
+        toUpdateProduct.setPrice(updatedProduct.price());
+        toUpdateProduct.setImageUrl(updatedProduct.imageUrl());
+        toUpdateProduct.setRating(updatedProduct.rating());
+        toUpdateProduct.setFeatured(updatedProduct.featured());
+
+        Product savedProduct = productRepository.save(toUpdateProduct);
+
+        return ProductMapper.entityToDto(savedProduct);
+    }
 }
