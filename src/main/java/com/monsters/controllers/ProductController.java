@@ -1,5 +1,6 @@
 package com.monsters.controllers;
 
+import com.monsters.dtos.product.ProductResponse;
 import com.monsters.models.Product;
 import com.monsters.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,8 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public ResponseEntity<List<Product>> getAllProductController() {
-        List<Product> products = productService.getAllProduct();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+    public ResponseEntity<List<ProductResponse>> getAllProduct() {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 
 }

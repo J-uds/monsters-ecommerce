@@ -1,5 +1,8 @@
 package com.monsters.services;
 
+import com.monsters.dtos.product.ProductMapper;
+import com.monsters.dtos.product.ProductRequest;
+import com.monsters.dtos.product.ProductResponse;
 import com.monsters.models.Product;
 import com.monsters.repositories.ProductRepository;
 import org.springframework.http.HttpStatus;
@@ -16,21 +19,25 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProduct() {
-        return productRepository.findAll();
+    public List<ProductResponse> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(product -> ProductMapper.entityToDto(product)).toList();
     }
 
-    public Product getByIdProduct(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+    public ProductResponse getProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        return ProductMapper.entityToDto(product);
     }
 
-    public Product addProduct(Product newProduct) {
-        return productRepository.save(newProduct);
+    public ProductResponse addProduct(ProductRequest productRequest) {
+        Product newProduct = ProductMapper.dtoToEntity(productRequest);
+        Product savedProduct = productRepository.save(newProduct);
+        return ProductMapper.entityToDto(savedProduct);
     }
 
-    public void deleteProductById(Long id) {
+    /*public void deleteProductById(Long id) {
         productRepository.deleteById(id);
-    }
+    }*/
 
     /*public Product updateProductById(Long id, Product updatedProduct) {
         Product toUpdateProduct = getByIdProduct(id);
