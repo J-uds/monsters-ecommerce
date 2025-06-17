@@ -31,8 +31,8 @@ public class ProductService {
 
     public ProductResponse addProduct(ProductRequest productRequest) {
         Product newProduct = ProductMapper.dtoToEntity(productRequest);
-        Product savedProduct = productRepository.save(newProduct);
-        return ProductMapper.entityToDto(savedProduct);
+        Product savedNewProduct = productRepository.save(newProduct);
+        return ProductMapper.entityToDto(savedNewProduct);
     }
 
     public void deleteProductById(Long id) {
@@ -46,7 +46,6 @@ public class ProductService {
         toUpdateProduct.setName(updatedProduct.name());
         toUpdateProduct.setPrice(updatedProduct.price());
         toUpdateProduct.setImageUrl(updatedProduct.imageUrl());
-        toUpdateProduct.setRating(updatedProduct.rating());
         toUpdateProduct.setFeatured(updatedProduct.featured());
 
         Product savedProduct = productRepository.save(toUpdateProduct);
