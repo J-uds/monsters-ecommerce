@@ -1,5 +1,9 @@
 package com.monsters.services;
 
+import com.monsters.dtos.review.ReviewMapper;
+import com.monsters.dtos.review.ReviewRequest;
+import com.monsters.dtos.review.ReviewResponse;
+import com.monsters.models.Product;
 import com.monsters.models.Review;
 import com.monsters.repositories.ReviewRepository;
 import org.springframework.http.HttpStatus;
@@ -16,15 +20,19 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public List<Review> getAllReview() {
-        return reviewRepository.findAll();
+    public List<ReviewResponse> getAllReview() {
+        List<Review> reviews = reviewRepository.findAll();
+        return reviews.stream().map(review -> ReviewMapper.entityToDto(review)).toList();
     }
 
-    public Review getByIdReview(Long id) {
-        return reviewRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found"));
+    public ReviewResponse getReviewById(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found"));
+        return ReviewMapper.entityToDto(review);
     }
 
-    public Review addReview(Review newReview) {
-        return reviewRepository.save(newReview);
+    public ReviewResponse addReview(ReviewRequest newReviewRequest, Product product) {
+        Review newReview = ReviewMapper.dtoToEntity(newReviewRequest, product);
+        Review savedNewReview = reviewRepository.save(newReview);
+        return ReviewMapper.entityToDto(savedNewReview);
     }
 }

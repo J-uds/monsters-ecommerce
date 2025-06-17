@@ -8,7 +8,6 @@ public record ProductRequest(
         @NotBlank(message = "Price is required")
         double price,
         String imageUrl,
-        double rating,
         @NotBlank(message = "Availability is required")
         boolean featured
 ) {

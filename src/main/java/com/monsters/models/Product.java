@@ -3,6 +3,7 @@ package com.monsters.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //@Data
@@ -40,17 +41,17 @@ public class Product {
     //mappedBy se mapea con el atributo product de la clase review, es decir ese atributo será la clave foránea
     private List<Review> reviews;
 
-    public Product(@NotBlank(message = "Name is required") String name, @NotBlank(message = "Price is required") double price, String s, double rating, @NotBlank(message = "Availability is required") boolean featured) {
+    public Product() {
     }
 
-    public Product(String name, double price, String imageUrl, double rating, int reviewCount, boolean featured, List<Review> reviews) {
+    public Product(String name, double price, String imageUrl, boolean featured) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
-        this.rating = rating;
-        this.reviewCount = reviewCount;
+        this.rating = 0.0;
+        this.reviewCount = 0;
         this.featured = featured;
-        this.reviews = reviews;
+        this.reviews = new ArrayList<>();
     }
 
     public Long getId() {
