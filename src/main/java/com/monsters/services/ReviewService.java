@@ -32,6 +32,12 @@ public class ReviewService {
         return ReviewMapper.entityToDto(review);
     }*/
 
+//Forma más corta y fácil de acceder a las reviews de cada producto:
+   /* public List<ReviewResponse> getReviewsByProductId(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("Product not found"));
+        return product.getReviews().stream().map(review -> ReviewMapper.entityToDto(review)).toList();
+    }*/
+
     public List<ReviewResponse> getAllProductReviews(Long productId) {
         List<Review> reviews = reviewRepository.findAllByProductId(productId);
         if (reviews.isEmpty()) {
