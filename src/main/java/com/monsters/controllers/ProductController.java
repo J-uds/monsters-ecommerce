@@ -5,7 +5,6 @@ import com.monsters.dtos.product.ProductResponse;
 import com.monsters.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +18,6 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    /*public ResponseEntity<List<ProductResponse>> getAllProduct() {
-        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
-    }*/
     public ResponseEntity<List<ProductResponse>> getAllProduct() {
         List<ProductResponse> products = productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
@@ -51,10 +47,4 @@ public class ProductController {
         ProductResponse updatedProduct = productService.updateProductById(id, productRequest);
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
-
-
-
-
-
-
 }

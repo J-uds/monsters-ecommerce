@@ -22,16 +22,6 @@ public class ReviewService {
         this.productRepository = productRepository;
     }
 
-   /* public List<ReviewResponse> getAllReview() {
-        List<Review> reviews = reviewRepository.findAll();
-        return reviews.stream().map(review -> ReviewMapper.entityToDto(review)).toList();
-    }
-
-    public ReviewResponse getReviewById(Long id) {
-        Review review = reviewRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found"));
-        return ReviewMapper.entityToDto(review);
-    }*/
-
     public List<ReviewResponse> getAllProductReviews(Long productId) {
         List<Review> reviews = reviewRepository.findAllByProductId(productId);
         if (reviews.isEmpty()) {

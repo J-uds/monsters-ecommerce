@@ -1,6 +1,5 @@
 package com.monsters.dtos.review;
 
-import com.monsters.models.Product;
 import jakarta.validation.constraints.NotBlank;
 
 public record ReviewRequest(

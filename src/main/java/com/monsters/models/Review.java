@@ -1,13 +1,7 @@
 package com.monsters.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
 @Entity
 @Table(name = "reviews")
 public class Review {
@@ -22,7 +16,6 @@ public class Review {
 
     @ManyToOne(targetEntity = Product.class)
     @JoinColumn(name = "product_id")
-    //para cambiar el nombre de la columna añadida, por defecto será product_id
     private Product product;
 
     public Review() {
@@ -38,10 +31,6 @@ public class Review {
     public Long getId() {
         return id;
     }
-
-    /*public void setId(Long id) {
-        this.id = id;
-    }*/
 
     public String getUserName() {
         return userName;
