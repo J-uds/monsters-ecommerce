@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -43,7 +44,7 @@ public class ReviewService {
         if (reviews.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No reviews found for this product");
         }
-        return reviews.stream().map(review -> ReviewMapper.entityToDto(review)).toList();
+        return reviews.stream().map(review -> ReviewMapper.entityToDto(review)).collect(Collectors.toList());
     }
 
     public ReviewResponse addReview(ReviewRequest newReviewRequest) {
