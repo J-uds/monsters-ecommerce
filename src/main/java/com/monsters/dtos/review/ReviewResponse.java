@@ -1,7 +1,7 @@
 package com.monsters.dtos.review;
 
 public record ReviewResponse(
-        String userName,
+        String username,
         double rating,
         String body
 ) {

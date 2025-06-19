@@ -7,7 +7,7 @@ import com.monsters.models.Review;
 public class ReviewMapper {
     public static Review dtoToEntity(ReviewRequest dto, Product product) {
         return new Review(
-                dto.userName(),
+                dto.username(),
                 dto.rating(),
                 dto.body(),
                 product
@@ -16,7 +16,7 @@ public class ReviewMapper {
 
     public static ReviewResponse entityToDto(Review review) {
         return new ReviewResponse(
-                review.getUserName(),
+                review.getUsername(),
                 review.getRating(),
                 review.getBody()
         );
