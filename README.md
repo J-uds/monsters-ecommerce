@@ -6,12 +6,14 @@ RESTful API to manage a product catalog and user reviews. Built with **Spring Bo
 
 ## 📦 Technologies Used
 
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Web
 - Spring Data JPA
 - Hibernate
 - MySQL 
+- dotenv-java
+- IntelliJ IDEA
 - Jakarta Validation
 - Layered architecture: Controller - Service - Repository - Model - DTO
 
