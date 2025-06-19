@@ -26,12 +26,12 @@ public class ReviewService {
    /* public List<ReviewResponse> getAllReview() {
         List<Review> reviews = reviewRepository.findAll();
         return reviews.stream().map(review -> ReviewMapper.entityToDto(review)).toList();
-    }
+    }*/
 
     public ReviewResponse getReviewById(Long id) {
         Review review = reviewRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found"));
         return ReviewMapper.entityToDto(review);
-    }*/
+    }
 
 //Forma más corta y fácil de acceder a las reviews de cada producto:
    /* public List<ReviewResponse> getReviewsByProductId(Long productId) {
@@ -54,5 +54,18 @@ public class ReviewService {
         Review newReview = ReviewMapper.dtoToEntity(newReviewRequest, product);
         Review savedNewReview = reviewRepository.save(newReview);
         return ReviewMapper.entityToDto(savedNewReview);
+    }
+
+
+    public ReviewResponse updateReviewtById(Long id, ReviewRequest updatedReview) {
+        Review toUpdateReview = reviewRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "review not found"));
+
+        toUpdateReview.setUsername(updatedReview.username());
+        toUpdateReview.setRating(updatedReview.rating());
+        toUpdateReview.setBody(updatedReview.body());
+
+        Review savedReview = reviewRepository.save(toUpdateReview);
+
+        return ReviewMapper.entityToDto(savedReview);
     }
 }
